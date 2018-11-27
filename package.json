@@ -1,10 +1,10 @@
 {
   "name": "protocheck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A rigorous type checking tool for javascript.",
   "main": "index.js",
   "scripts": {
-    "test": "note ./tests"
+    "test": "node ./tests"
   },
   "author": "Jeff McMahan",
   "license": "ISC"

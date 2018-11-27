@@ -3,18 +3,14 @@
 const state = require('./state')
 const typeCheck = require('./typeCheck')
 const types = require('./types')
-
-const typeError = args => {
-	// Todo: Get a decent error message here.
-	return new TypeError('!')
-} 
+const error = require('./error')
 
 // Throw on failure and respect the disable switch.
-module.exports = (...args) => {
+module.exports = (v, Type) => {
 	if (!state.enabled) {
 		return
-	} else if (!typeCheck(...args)) {
-		throw typeError(args)
+	} else if (!typeCheck(v, Type)) {
+		throw new TypeError(error(v, Type, new Error('')))
 	}
 }
 
@@ -23,3 +19,4 @@ module.exports.types = types
 
 // Expose the off-switch.
 module.exports.disable = () => state.enabled = false
+
