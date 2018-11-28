@@ -99,6 +99,7 @@ assert.equal(detail('1', Number).valueTypeName, 'String')
 
 assert.equal(detail({}, Dictionary).expectedTypeName, 'Dictionary')
 assert.equal(detail({}, Dictionary).valueTypeName, 'Object')
+assert.equal(detail(Object.create(null), {}).valueTypeName, 'Dictionary')
 
 assert.equal(detail(1, Maybe(String)).expectedTypeName, 'Maybe(String)')
 assert.equal(detail(1, Maybe(String)).valueTypeName, 'Number')

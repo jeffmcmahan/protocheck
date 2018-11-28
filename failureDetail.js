@@ -14,7 +14,7 @@ module.exports = (value, expectedType) => {
 	const valueTypeName = (
 			value == null ? value
 		: 	value.constructor ? value.constructor.name
-		:	value.constructor
+		:	'Dictionary'
 	)
 
 	return {expectedTypeName, valueTypeName}
