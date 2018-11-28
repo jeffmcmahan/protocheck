@@ -1,6 +1,6 @@
 {
   "name": "protocheck",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A rigorous type checking tool for javascript.",
   "main": "index.js",
   "scripts": {

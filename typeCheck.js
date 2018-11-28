@@ -1,6 +1,6 @@
 'use strict'
 
-const {hmac} = require('./state')
+const hmac = require('./hmac')
 const protoCheck = require('./protoCheck')
 
 // Wrapper facade to expose the prototypes
