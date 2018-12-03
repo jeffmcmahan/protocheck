@@ -9,10 +9,15 @@ const {
 // Primitives
 assert(typeCheck(1, Number))
 assert(!typeCheck({}, Number))
+assert(!typeCheck('', Object))
+
 assert(typeCheck('', String))
+assert(!typeCheck('', Object))
 assert(!typeCheck(1, String))
+
 assert(typeCheck(false, Boolean))
 assert(!typeCheck('', Boolean))
+assert(!typeCheck(5, Object))
 
 // Well-behaved composite values
 assert(typeCheck({}, Object))
@@ -23,6 +28,7 @@ assert(!typeCheck(() => {}, Date))
 // Function
 assert(typeCheck(() => {}, Function))
 assert(!typeCheck('', Function))
+assert(!typeCheck(()=>{}, Object))
 
 // Array
 assert(typeCheck([], Array))
@@ -53,6 +59,7 @@ assert(!typeCheck({}, Dictionary))
 // Maybe
 assert(typeCheck('', Maybe(String)))
 assert(typeCheck(undefined, Maybe(String)))
+assert(typeCheck(null, Maybe(String, Number)))
 assert(!typeCheck(5, Maybe(String)))
 
 // Union

@@ -10,7 +10,7 @@ module.exports = (v, Type) => {
 		return Type(v)
 	}
 
-	if (((v == null) || (Type == null)) && v !== Type) {
+	if (v == null && v !== Type) {
 		return false
 	}
 

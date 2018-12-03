@@ -1,17 +1,18 @@
 'use strict'
 
+const nonObjects = [Boolean, String, Number, Array, Function].map(v => v.prototype)
+
 // The actual type checker
 module.exports = (proto, v) => {
-	if (proto === null) {
-		return v.__proto__ === void 0
-	}
-	let ignoreObject
+	let ignoreObj
 	while (v.__proto__) {
-		if (v.__proto__=== Array.prototype || v.__proto__ === Function.prototype) {
-			ignoreObject = true
+		if (nonObjects.includes(v.__proto__)) {
+			ignoreObj = true
 		}
 		if (v.__proto__ === proto) {
-			return ignoreObject ? !!v.__proto__.__proto__ : true
+			return (ignoreObj && proto === Object.prototype) 
+				? !!v.__proto__.__proto__ 
+				: true
 		}
 		v = v.__proto__
 	}

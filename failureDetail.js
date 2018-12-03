@@ -11,7 +11,7 @@ module.exports = (value, expectedType) => {
 		? expectedType.__desc 
 		: expectedType.name
 	
-	const valueTypeName = (
+	const valueTypeName = '' + (
 			value == null ? value
 		: 	value.constructor ? value.constructor.name
 		:	'Dictionary'
