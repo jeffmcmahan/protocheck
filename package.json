@@ -6,6 +6,6 @@
   "scripts": {
     "test": "node ./tests"
   },
-  "author": "Jeff McMahan",
+  "author": "jeffrey.lee.mcmahan@gmail.com",
   "license": "ISC"
 }
