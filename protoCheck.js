@@ -1,20 +1,34 @@
 'use strict'
 
-const nonObjects = [Boolean, String, Number, Array, Function].map(v => v.prototype)
+const getProto = Object.getPrototypeOf || (v => v.__proto__)
+const objProto = Object.prototype
 
-// The actual type checker
+// These are the types that we will not treat as Objects, following the intention 
+// expressed in the ES6 spec at sec. 4.3.2, describing primitives as: "member of 
+// one of the types... Boolean, Number, Symbol, or String," and then add Function
+// and Array, in keeping with reasonable mainstream expectations.
+const nonObjects = [
+	Boolean, 
+	Symbol, 
+	String, 
+	Number, 
+	Array, 
+	Function
+].map(v => v.prototype)
+
 module.exports = (proto, v) => {
 	let ignoreObj
-	while (v.__proto__) {
-		if (nonObjects.includes(v.__proto__)) {
+	let vProto = getProto(v)
+	while (vProto) {
+		if (nonObjects.includes(vProto)) {
 			ignoreObj = true
 		}
-		if (v.__proto__ === proto) {
-			return (ignoreObj && proto === Object.prototype) 
-				? !!v.__proto__.__proto__ 
+		if (vProto === proto) {
+			return (ignoreObj && proto === objProto) 
+				? !!getProto(vProto)
 				: true
 		}
-		v = v.__proto__
+		vProto = getProto(vProto)
 	}
 	return false
 }
