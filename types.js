@@ -68,7 +68,7 @@ const Tuple = (...types) => {
 // T is a generic type (takes the type of a value) to check a value.
 const T = v1 => {
 	let proto = (v1 == null) ? v1 : v1.__proto__
-	const test = v2 => protoCheck(proto, v2)
+	const test = v2 => ((v1 == null && v1 === v2) || protoCheck(proto, v2))
 	test.__desc = 'T(' + valueType(v1)  + ')'
 	test.hmac = hmac
 	return test

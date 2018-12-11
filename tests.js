@@ -75,6 +75,10 @@ assert(!typeCheck([1], Tuple(String, Number)))
 // Generic
 assert(typeCheck('', T('')))
 assert(!typeCheck(1, T('')))
+assert(typeCheck(null, T(null)))
+assert(typeCheck(undefined, T(undefined)))
+assert(!typeCheck(undefined, T(null)))
+assert(!typeCheck(null, T(undefined)))
 
 // Array Generics
 assert(typeCheck(['foo', 'bar'], ArrayT(String)))
