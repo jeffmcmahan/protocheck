@@ -79,6 +79,10 @@ assert(typeCheck(null, T(null)))
 assert(typeCheck(undefined, T(undefined)))
 assert(!typeCheck(undefined, T(null)))
 assert(!typeCheck(null, T(undefined)))
+assert(typeCheck([], T([])))
+assert(typeCheck({}, T({})))
+assert(!typeCheck([], T({})))
+assert(!typeCheck({}, T([])))
 
 // Array Generics
 assert(typeCheck(['foo', 'bar'], ArrayT(String)))
