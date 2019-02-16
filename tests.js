@@ -8,8 +8,13 @@ const {
 
 // Primitives
 assert(typeCheck(1, Number))
+assert(!typeCheck(null, Number))
+assert(!typeCheck(undefined, Number))
 assert(!typeCheck({}, Number))
+
 assert(!typeCheck('', Object))
+assert(!typeCheck(null, Object))
+assert(!typeCheck(undefined, Number))
 
 assert(typeCheck('', String))
 assert(!typeCheck('', Object))
@@ -24,6 +29,8 @@ assert(typeCheck({}, Object))
 assert(!typeCheck(() => {}, Object))
 assert(typeCheck(new Date(), Date))
 assert(!typeCheck(() => {}, Date))
+assert(!typeCheck(null, Date))
+assert(!typeCheck(undefined, Date))
 
 // Function
 assert(typeCheck(() => {}, Function))
@@ -33,18 +40,23 @@ assert(!typeCheck(()=>{}, Object))
 // Array
 assert(typeCheck([], Array))
 assert(!typeCheck({}, Array))
+assert(!typeCheck(null, Array))
+assert(!typeCheck(undefined, Array))
 assert(!typeCheck([], Object))
 
 // Any
 assert(typeCheck(undefined, Any))
+assert(typeCheck(null, Any))
 assert(typeCheck(new Date(), Any))
 
 // Undefined
 assert(typeCheck(undefined, Undefined))
+assert(!typeCheck(1, Undefined))
 assert(!typeCheck(null, Undefined))
 
 // Null
 assert(typeCheck(null, Null))
+assert(!typeCheck(1, Null))
 assert(!typeCheck(undefined, Null))
 
 // Void (undefined or null)
@@ -55,6 +67,10 @@ assert(!typeCheck(0, Void))
 // Dictionary
 assert(typeCheck(Object.create(null), Dictionary))
 assert(!typeCheck({}, Dictionary))
+assert(!typeCheck(Object.prototype, Dictionary))
+assert(!typeCheck(1, Dictionary))
+assert(!typeCheck(null, Dictionary))
+assert(!typeCheck(undefined, Dictionary))
 
 // Maybe
 assert(typeCheck('', Maybe(String)))
@@ -66,11 +82,15 @@ assert(!typeCheck(5, Maybe(String)))
 assert(typeCheck('', U(String, Number)))
 assert(typeCheck(1, U(String, Number)))
 assert(!typeCheck([], U(String, Number)))
+assert(!typeCheck(null, U(String, Number)))
 
 // Tuple
-assert(typeCheck(['', 1], Tuple(String, Number)))
-assert(!typeCheck([1, 1], Tuple(String, Number)))
-assert(!typeCheck([1], Tuple(String, Number)))
+const numOrString = Tuple(String, Number)
+assert(typeCheck(['', 1], numOrString))
+assert(!typeCheck([1, 1], numOrString))
+assert(!typeCheck([1], numOrString))
+assert(!typeCheck(1, numOrString))
+assert(!typeCheck(null, numOrString))
 
 // Generic
 assert(typeCheck('', T('')))
@@ -88,6 +108,7 @@ assert(!typeCheck({}, T([])))
 assert(typeCheck(['foo', 'bar'], ArrayT(String)))
 assert(typeCheck([1, 2], ArrayT(Number)))
 assert(!typeCheck([1, '2'], ArrayT(Number)))
+assert(!typeCheck(null, ArrayT(Number)))
 
 // Composition
 const maybeStrNum = Maybe(U(String, Number))

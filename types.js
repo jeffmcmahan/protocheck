@@ -31,7 +31,7 @@ Null.__desc = 'Null'
 Null.hmac = hmac
 
 // Dictionaries, i.e.: Object.create(null)
-const Dictionary = v => v.__proto__ === void 0
+const Dictionary = v => v && (v.__proto__ === void 0)
 Dictionary.__desc = 'Dictionary'
 Dictionary.hmac = hmac
 
@@ -57,6 +57,7 @@ Void.__desc = 'Void'
 // Tuples are array of a given length with items of given types.
 const Tuple = (...types) => {
 	const test = v => (
+		typeCheck(v, Array) &&
 		types.length === v.length &&
 		types.every((type, i) => typeCheck(v[i], type))
 	)
@@ -77,7 +78,8 @@ const T = v1 => {
 // ArrayT is an array generic type (string array is Array(String).
 const ArrayT = type => {
 	const test = arr => (
-		Array.isArray(arr) && arr.every(val => typeCheck(val, type))
+		typeCheck(arr, Array) && 
+		arr.every(val => typeCheck(val, type))
 	)
 	test.__desc = 'ArrayT(' + typeNames([type])  + ')'
 	test.hmac = hmac
