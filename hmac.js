@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = Math.random()
+module.exports = '8972bac721df873b'
